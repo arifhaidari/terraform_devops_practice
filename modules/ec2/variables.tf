@@ -1,21 +1,37 @@
-# variables.tf content for ec2
+variable "vpc_id" {
+  description = "ID of the VPC"
+  type        = string
+}
+
+variable "private_subnet_ids" {
+  description = "List of private subnet IDs"
+  type        = list(string)
+}
+
 variable "ami_id" {
-  description = "AMI ID for EC2 instances"
+  description = "AMI ID for the EC2 instances"
   type        = string
 }
 
 variable "instance_type" {
-  description = "Type of instance to launch"
+  description = "Instance type for the EC2 instances"
   type        = string
   default     = "t2.micro"
 }
 
-variable "public_subnet_ids" {
-  description = "List of public subnet IDs for instances"
-  type        = list(string)
+variable "min_size" {
+  description = "Minimum number of instances in the Auto Scaling group"
+  type        = number
+  default     = 1
 }
 
-variable "key_pair_name" {
-  description = "Key pair name for SSH access"
+variable "max_size" {
+  description = "Maximum number of instances in the Auto Scaling group"
+  type        = number
+  default     = 2
+}
+
+variable "ec2_security_group_id" {
+  description = "Security group ID for the EC2 instances"
   type        = string
 }

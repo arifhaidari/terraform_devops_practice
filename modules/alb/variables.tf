@@ -1,10 +1,14 @@
-# variables.tf content for alb
+variable "vpc_id" {
+  description = "ID of the VPC"
+  type        = string
+}
+
 variable "public_subnet_ids" {
-  description = "List of public subnet IDs for ALB"
+  description = "List of public subnet IDs"
   type        = list(string)
 }
 
-variable "security_group_id" {
+variable "alb_security_group_id" {
   description = "Security group ID for the ALB"
   type        = string
 }

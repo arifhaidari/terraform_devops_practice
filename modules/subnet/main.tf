@@ -1,19 +1,19 @@
-# main.tf content for subnet
-resource "aws_subnet" "public_subnet" {
-  vpc_id            = var.vpc_id
-  cidr_block        = var.public_cidr_block
-  availability_zone = var.availability_zone
-  map_public_ip_on_launch = true
+resource "aws_subnet" "public_subnets" {
+  count = length(var.public_subnet_cidrs)
+  vpc_id = var.vpc_id
+  cidr_block = var.public_subnet_cidrs[count.index]
+  availability_zone = element(var.availability_zones, count.index)
   tags = {
-    Name = "${var.subnet_name}-public"
+    Name = "Public Subnet ${count.index + 1}"
   }
 }
 
-resource "aws_subnet" "private_subnet" {
-  vpc_id            = var.vpc_id
-  cidr_block        = var.private_cidr_block
-  availability_zone = var.availability_zone
+resource "aws_subnet" "private_subnets" {
+  count = length(var.private_subnet_cidrs)
+  vpc_id = var.vpc_id
+  cidr_block = var.private_subnet_cidrs[count.index]
+  availability_zone = element(var.availability_zones, count.index)
   tags = {
-    Name = "${var.subnet_name}-private"
+    Name = "Private Subnet ${count.index + 1}"
   }
 }

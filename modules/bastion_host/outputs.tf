@@ -1,5 +1,9 @@
-# outputs.tf content for bastion_host
-output "bastion_host_instance_ids" {
-  description = "IDs of the Bastion host instances"
-  value       = aws_instance.bastion_host[*].id
+output "bastion_host_id" {
+  description = "The ID of the Bastion host"
+  value       = aws_instance.bastion.id
+}
+
+output "bastion_host_public_ip" {
+  description = "The public IP address of the Bastion host"
+  value       = aws_instance.bastion.public_ip
 }

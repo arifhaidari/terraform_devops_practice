@@ -1,5 +1,9 @@
-# outputs.tf content for rds
-output "rds_endpoint" {
+output "rds_instance_endpoint" {
   description = "The endpoint of the RDS instance"
-  value       = aws_db_instance.db_instance.endpoint
+  value       = aws_db_instance.rds_instance.endpoint
+}
+
+output "rds_instance_arn" {
+  description = "The ARN of the RDS instance"
+  value       = aws_db_instance.rds_instance.arn
 }

@@ -1,9 +1,10 @@
-# main.tf content for bastion_host
 resource "aws_instance" "bastion" {
-  ami           = var.bastion_ami_id
-  instance_type = "t2.micro"
-  subnet_id     = var.public_subnet_id
-  key_name      = var.key_name
+  ami                         = var.ami_id
+  instance_type               = var.instance_type
+  subnet_id                   = var.public_subnet_ids[0] # Place in the first public subnet
+  associate_public_ip_address = true
+  vpc_security_group_ids      = [var.bastion_security_group_id]
+
   tags = {
     Name = "Bastion Host"
   }

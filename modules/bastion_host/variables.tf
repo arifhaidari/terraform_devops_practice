@@ -1,11 +1,10 @@
-# variables.tf content for bastion_host
 variable "ami_id" {
-  description = "AMI ID for the Bastion host"
+  description = "The AMI ID for the Bastion host"
   type        = string
 }
 
 variable "instance_type" {
-  description = "Instance type for the Bastion host"
+  description = "The instance type for the Bastion host"
   type        = string
   default     = "t2.micro"
 }
@@ -15,7 +14,7 @@ variable "public_subnet_ids" {
   type        = list(string)
 }
 
-variable "key_pair_name" {
-  description = "Key pair name for SSH access"
+variable "bastion_security_group_id" {
+  description = "The security group ID for the Bastion host"
   type        = string
 }
