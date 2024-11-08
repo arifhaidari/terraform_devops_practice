@@ -21,32 +21,38 @@ module "alb" {
   source = "./modules/alb"
   vpc_id = module.vpc.vpc_id
   public_subnet_ids = module.subnet.public_subnet_ids
+
+  # Pass the alb_security_group_id
+  alb_security_group_id = aws_security_group.alb_sg.id
 }
 
+
 module "ec2" {
-  source = "./modules/ec2"
-  vpc_id = module.vpc.vpc_id
-  private_subnet_ids = module.subnet.private_subnet_ids
-  ami_id = var.ami_id
-  instance_type = var.instance_type
-  min_size = var.min_size
-  max_size = var.max_size
+  source              = "./modules/ec2"
+  vpc_id              = module.vpc.vpc_id
+  private_subnet_ids  = module.subnet.private_subnet_ids
+  ami_id              = var.ami_id
+  instance_type       = var.instance_type
+  min_size            = var.min_size
+  max_size            = var.max_size
+  ec2_security_group_id = aws_security_group.ec2_sg.id  # Pass the security group ID
 }
 
 module "rds" {
-  source = "./modules/rds"
-  vpc_id = module.vpc.vpc_id
-  private_subnet_ids = module.subnet.private_subnet_ids
-  db_instance_type = var.db_instance_type
-  db_name = var.db_name
-  db_username = var.db_username
-  db_password = var.db_password
+  source               = "./modules/rds"
+  private_subnet_ids   = module.subnet.private_subnet_ids
+  db_instance_type     = var.db_instance_type
+  db_name              = var.db_name
+  db_username          = var.db_username
+  db_password          = var.db_password
+  db_security_group_id = aws_security_group.rds_sg.id  # Pass the RDS security group ID
 }
 
+
 module "bastion_host" {
-  source = "./modules/bastion_host"
-  vpc_id = module.vpc.vpc_id
-  public_subnet_ids = module.subnet.public_subnet_ids
-  ami_id = var.ami_id
-  instance_type = var.bastion_instance_type
+  source              = "./modules/bastion_host"
+  public_subnet_ids   = module.subnet.public_subnet_ids
+  bastion_security_group_id = aws_security_group.bastion_sg.id  # Pass the security group ID
+  ami_id              = var.ami_id
+  instance_type       = var.bastion_instance_type
 }

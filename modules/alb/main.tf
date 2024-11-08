@@ -1,3 +1,40 @@
+# Create a security group for the ALB
+resource "aws_security_group" "alb_sg" {
+  name_prefix = "alb-sg-"
+  description = "Security group for ALB"
+  vpc_id      = aws_vpc.main.id
+
+  # Allow inbound HTTP and HTTPS traffic to the ALB
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # Allow outbound traffic
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "alb-sg"
+  }
+}
+
+
+# ===========
+
 resource "aws_lb" "application_load_balancer" {
   name               = "app-load-balancer"
   internal           = false

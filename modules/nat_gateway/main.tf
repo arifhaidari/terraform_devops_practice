@@ -1,6 +1,13 @@
+# resource "aws_eip" "nat_gateway" {
+#   count = length(var.public_subnet_ids)
+#   vpc   = true
+# }
+
+# The vpc = true argument in the aws_eip resource is deprecated. 
+# You should replace it with the domain attribute.
+
 resource "aws_eip" "nat_gateway" {
-  count = length(var.public_subnet_ids)
-  vpc   = true
+  domain = "vpc"
 }
 
 resource "aws_nat_gateway" "nat_gateway" {
