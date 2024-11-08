@@ -2,3 +2,8 @@
 
 .terraform.lock.hcl
 .terraform/
+
+*.pem
+terraform.tfstate*
+
+.DS_Store

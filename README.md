@@ -2,6 +2,10 @@
 
 This project is part of an exam for the **DataScientest Bootcamp** and serves as a practical exercise to deepen knowledge of **Terraform** and essential **DevOps** skills. Here, Terraform—a cloud-agnostic infrastructure-as-code (IaC) tool—was used to automate the deployment of a Virtual Private Cloud (VPC) and supporting infrastructure components on AWS. This setup includes VPC, subnets, NAT gateway, an Application Load Balancer (ALB), EC2 instances, an RDS database, and a bastion host, demonstrating a comprehensive cloud environment.
 
+## Note
+
+The exam directory is the last update and the rest of the code are practices and snippets.
+
 ## Project Purpose
 
 The project’s purpose is to:
